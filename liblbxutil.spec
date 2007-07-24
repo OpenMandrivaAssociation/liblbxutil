@@ -1,12 +1,19 @@
-%define liblbxutil %mklibname lbxutil 1
-Name: liblbxutil
+%define name	liblbxutil
+%define version	1.0.1
+%define release	%mkrel 3
+
+%define libname 	%mklibname lbxutil 1
+%define develname	%mklibname lbxutil -d
+%define staticname	%mklibname lbxutil -d -s
+
+Name: %{name}
 Summary: LBX Utility library
-Version: 1.0.1
-Release: %mkrel 2
+Version: %{version}
+Release: %{release}
 Group: Development/X11
 License: MIT
 URL: http://xorg.freedesktop.org
-Source0: http://xorg.freedesktop.org/releases/individual/lib/liblbxutil-%{version}.tar.bz2
+Source0: http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-root
 
 BuildRequires: zlib-devel
@@ -17,28 +24,29 @@ BuildRequires: x11-util-macros >= 1.0.1
 LBX Utility library.
 
 #-----------------------------------------------------------
-%package -n %{liblbxutil}
+%package -n %{libname}
 Summary: LBX Utilities
 Group: Development/X11
 Conflicts: libxorg-x11 < 7.0
 Provides: %{name} = %{version}
 
-%description -n %{liblbxutil}
+%description -n %{libname}
 LBX Utility library.
 
 #-----------------------------------------------------------
 
-%package -n %{liblbxutil}-devel
+%package -n %{develname}
 Summary: Development files for %{name}
 Group: Development/X11
-Requires: %{liblbxutil} = %{version}
-Provides: liblbxutil-devel = %{version}-%{release}
+Requires: %{libname} = %{version}
+Provides: %{name}-devel = %{version}-%{release}
 Conflicts: libxorg-x11-devel < 7.0
+Obsoletes: %{mklibname lbxutil 1 -d}
 
-%description -n %{liblbxutil}-devel
+%description -n %{develname}
 Development files for %{name}
 
-%files -n %{liblbxutil}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %{_libdir}/liblbxutil.so
 %{_libdir}/liblbxutil.la
@@ -46,17 +54,18 @@ Development files for %{name}
 
 #-----------------------------------------------------------
 
-%package -n %{liblbxutil}-static-devel
+%package -n %{staticname}
 Summary: Static development files for %{name}
 Group: Development/X11
-Requires: %{liblbxutil}-devel = %{version}
-Provides: liblbxutil-static-devel = %{version}-%{release}
+Requires: %{develname} = %{version}
+Provides: %{name}-static-devel = %{version}-%{release}
 Conflicts: libxorg-x11-static-devel < 7.0
+Obsoletes: %{mklibname lbxutil 1 -d -s}
 
-%description -n %{liblbxutil}-static-devel
+%description -n %{staticname}
 Static development files for %{name}
 
-%files -n %{liblbxutil}-static-devel
+%files -n %{staticname}
 %defattr(-,root,root)
 %{_libdir}/liblbxutil.a
 
@@ -78,12 +87,10 @@ rm -rf %{buildroot}
 %clean
 rm -rf %{buildroot}
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post -n %{libname} -p /sbin/ldconfig
+%postun -n %{libname} -p /sbin/ldconfig
 
-%files -n %{liblbxutil}
+%files -n %{libname}
 %defattr(-,root,root)
 %{_libdir}/liblbxutil.so.1
 %{_libdir}/liblbxutil.so.1.0.0
-
-
