@@ -1,24 +1,20 @@
-%define name	liblbxutil
-%define version	1.0.1
-%define release	%mkrel 4
-
 %define libname 	%mklibname lbxutil 1
 %define develname	%mklibname lbxutil -d
 %define staticname	%mklibname lbxutil -d -s
 
-Name: %{name}
+Name: liblbxutil
 Summary: LBX Utility library
-Version: %{version}
-Release: %{release}
+Version: 1.0.1
+Release: %mkrel 5
 Group: Development/X11
 License: MIT
 URL: http://xorg.freedesktop.org
 Source0: http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-root
 
+BuildRequires: x11-util-macros	>= 1.1.5
 BuildRequires: zlib-devel
-BuildRequires: x11-proto-devel >= 1.0.0
-BuildRequires: x11-util-macros >= 1.0.1
+BuildRequires: x11-proto-devel	>= 7.3
 
 %description
 LBX Utility library.
@@ -75,7 +71,7 @@ Static development files for %{name}
 %setup -q -n liblbxutil-%{version}
 
 %build
-%configure2_5x	--x-includes=%{_includedir}\
+%configure	--x-includes=%{_includedir}\
 		--x-libraries=%{_libdir}
 
 %make
