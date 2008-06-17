@@ -1,6 +1,6 @@
 %define name		liblbxutil
 %define version		1.0.1
-%define release		%mkrel 5
+%define release		%mkrel 6
 
 %define libname 	%mklibname lbxutil 1
 %define develname	%mklibname lbxutil -d
