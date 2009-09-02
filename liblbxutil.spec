@@ -2,7 +2,7 @@
 
 %define name		liblbxutil
 %define version		1.0.1
-%define release		%mkrel 7
+%define release		%mkrel 8
 
 %define libname 	%mklibname lbxutil 1
 %define develname	%mklibname lbxutil -d
