@@ -1,8 +1,6 @@
-%define _disable_ld_no_undefined 1
-
 %define name		liblbxutil
-%define version		1.0.1
-%define release		%mkrel 8
+%define version		1.1.0
+%define release		%mkrel 1
 
 %define libname 	%mklibname lbxutil 1
 %define develname	%mklibname lbxutil -d
@@ -50,6 +48,7 @@ Development files for %{name}
 
 %files -n %{develname}
 %defattr(-,root,root)
+%{_includedir}/X11/extensions/*.h
 %{_libdir}/liblbxutil.so
 %{_libdir}/liblbxutil.la
 %{_libdir}/pkgconfig/lbxutil.pc
@@ -77,9 +76,8 @@ Static development files for %{name}
 %setup -q -n liblbxutil-%{version}
 
 %build
-%configure2_5x	--x-includes=%{_includedir}\
-		--x-libraries=%{_libdir}
-
+%define _disable_ld_no_undefined 1
+%configure2_5x
 %make
 
 %install
