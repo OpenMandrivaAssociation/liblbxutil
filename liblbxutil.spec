@@ -1,6 +1,6 @@
 %define name		liblbxutil
 %define version		1.1.0
-%define release		%mkrel 1
+%define release		%mkrel 2
 
 %define libname 	%mklibname lbxutil 1
 %define develname	%mklibname lbxutil -d
@@ -41,6 +41,7 @@ Group: Development/X11
 Requires: %{libname} = %{version}
 Provides: %{name}-devel = %{version}-%{release}
 Conflicts: libxorg-x11-devel < 7.0
+Conflicts: %{_lib}xext6-devel < 1:1.1.1-2
 Obsoletes: %{mklibname lbxutil 1 -d}
 
 %description -n %{develname}
