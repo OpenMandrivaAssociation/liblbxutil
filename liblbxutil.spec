@@ -14,7 +14,7 @@ Group: Development/X11
 License: MIT
 URL: http://xorg.freedesktop.org
 Source0: http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.bz2
-BuildRoot: %{_tmppath}/%{name}-root
+Patch0:		aarch64.patch
 
 BuildRequires: zlib-devel
 BuildRequires: x11-proto-devel >= 1.0.0
@@ -74,6 +74,7 @@ Static development files for %{name}
 
 %prep
 %setup -q -n liblbxutil-%{version}
+%patch0 -p1
 
 %build
 %define _disable_ld_no_undefined 1
@@ -81,21 +82,9 @@ Static development files for %{name}
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/liblbxutil.so.1
 %{_libdir}/liblbxutil.so.1.0.0
 
