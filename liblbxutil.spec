@@ -42,7 +42,8 @@ Development files for %{name}
 
 %build
 %define _disable_ld_no_undefined 1
-%configure2_5x
+%configure2_5x \
+	--disable-static
 %make
 
 %install
