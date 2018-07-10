@@ -5,7 +5,7 @@
 Summary:	LBX Utility library
 Name:		liblbxutil
 Version:	1.1.0
-Release:	16
+Release:	17
 Group:		Development/X11
 License:	MIT
 Url:		http://xorg.freedesktop.org
