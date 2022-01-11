@@ -42,7 +42,10 @@ Development files for %{name}
 
 %build
 %define _disable_ld_no_undefined 1
+export CC=gcc
+export CXX=g++
 %configure2_5x \
+	CFLAGS="$CFLAGS -Wl,--allow-multiple-definition" \
 	--disable-static
 %make
 
